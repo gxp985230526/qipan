@@ -1,0 +1,55 @@
+$width:600px;
+$radiu:15px;
+$number:$width/$radiu/2;
+
+@mixin positionAuto{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+}
+.chess{
+    width: $width;
+    height: $width;
+    @include positionAuto();
+    border: 1px solid #000;
+    >span.heng{
+        position: absolute;
+        left:$radiu;
+        width: $width - 2 *$radiu;
+        height: 1px;
+        background: #000;
+    }
+    >i.shu{
+        position: absolute;
+        top:$radiu;
+        height: $width - 2 *$radiu;
+        width: 1px;
+        background: #000;
+    }
+    @for $i from 1 through 20{
+        >span.heng:nth-of-type(#{$i}){
+            top:(2 * $i - 1) * $radiu;
+            transform: translate(-2000px,0);
+            animation: fadein
+ 1s ease-in-out 1 forwards;
+ animation-delay: $i*100ms;
+        }
+        >i.shu:nth-of-type(#{$i}){
+            left:(2 * $i - 1) * $radiu;
+            transform: translate(0,-2000px);
+            animation: fadein
+ 1s ease-in-out 1 forwards;
+ animation-delay: $i * 100ms;
+        }
+    }
+}
+@keyframes fadein{
+    from{
+
+    }
+    to{
+        transform: translate(0,0)
+    }
+
+}
